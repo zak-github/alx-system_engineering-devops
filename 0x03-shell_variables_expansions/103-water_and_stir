@@ -1,0 +1,5 @@
+#!/bin/bash
+water=#2$WATER
+stir=#2$STIR
+bestchol=$(($water+$stir  ) )
+printf $bestchol
