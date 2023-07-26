@@ -1,17 +1,2 @@
 #!/bin/bash
-
-# Clear the terminal
-clear
-
-# Star Wars IV Opening Crawl
-cat << "EOF"
-    ____        __          ____
-   / __ \____ _/ /____     / __ \____  _____
-  / /_/ / __ `/ __/ _ \   / /_/ / __ \/ ___/
- / ____/ /_/ / /_/  __/  / _, _/ /_/ (__  )
-/_/    \__,_/\__/\___/  /_/ |_|\____/____/
-
-A long time ago in a galaxy far,
-far away....
-all ALX WARRIORS WIN THE WAR
-THE END
+telnet towel.blinkenlights.nl
