@@ -1,0 +1,52 @@
+# File: 3-server_web_infrastructure_secure_monitored
+
+# Infrastructure Design
+  +---------------------+       +---------------------+       +---------------------+
+  |    Firewalls (3)    |       |   SSL Certificate  |       | Monitoring Clients |
+  |                     |       |    (HTTPS)          |       | (Data Collectors)  |
+  | - Enhances security |       | - Encrypts traffic  |       | - Collects metrics  |
+  | - Controls traffic  |       |    between users    |       |   and logs         |
+  +---------------------+       |    and the website  |       +---------------------+
+                                |                     |
+  +---------------------+       +---------------------+       +---------------------+
+  |    Web Server 1     |       |     Load Balancer   |       |      Database       |
+  |      (Nginx)        |       |                     |       |  (MySQL Cluster)    |
+  | - Handles HTTPS reqs| <---> | - Terminates SSL at  | <---> | - Primary Node      |
+  | - Serves static     |       |   the load balancer  |       |   (Handles writes)  |
+  |   and dynamic content|       |                     |       | - Replica Node      |
+  |                     |       |                     |       |   (Handles reads)   |
+  +---------------------+       +---------------------+       +---------------------+
+
+# Role Explanations
+- **Firewalls (3):**
+  - Act as security barriers, controlling incoming and outgoing traffic.
+
+- **SSL Certificate for HTTPS:**
+  - Encrypts data in transit, ensuring secure communication.
+
+- **Monitoring Clients (Data Collectors):**
+  - Collect metrics and logs for monitoring system health.
+
+- **Load Balancer:**
+  - Distributes traffic, enhances availability, and acts as a termination point for SSL.
+
+- **Database (MySQL Cluster):**
+  - Primary Node: Handles write operations.
+  - Replica Node: Replicates data for read operations.
+
+# Monitoring Tool Data Collection:
+- Utilizes data collectors on each server to gather metrics and logs for analysis.
+
+# Issues with this Infrastructure
+1. Terminating SSL at the Load Balancer:
+   - May expose unencrypted traffic between the load balancer and backend servers.
+   - Solution: Implement end-to-end encryption or secure channels.
+
+2. Single MySQL Server for Writes:
+   - Single point of failure; failure could lead to service disruptions.
+   - Solution: Implement MySQL cluster with primary-replica replication.
+
+3. Uniform Server Components:
+   - May lead to vulnerabilities across the entire infrastructure.
+   - Solution: Diversify server components to minimize risks.
+

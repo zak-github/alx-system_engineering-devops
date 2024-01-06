@@ -1,0 +1,35 @@
+    +---------------------+         +---------------------+         +-----------------------+
+    |    Load Balancer    |         |    Web Server 1     |         |       Database        |
+    |      (HAproxy)       |         |      (Nginx)       |         |    (MySQL Cluster)    |
+    | - Round-robin        |         | - Handles HTTP reqs |         | - Primary Node (Master)|
+    | - Active-Active setup|         | - Serves static     |         |   - Handles write ops |
+    +---------------------+         |   content           |         | - Replica Node (Slave)|
+              |                     | - Forwards dynamic  |         |   - Handles read ops  |
+              |                     |   content to App    |         +-----------------------+
+    +---------------------+         +---------------------+
+    |    Web Server 2     |
+    |      (Nginx)       |
+    | - Handles HTTP reqs |
+    | - Serves static     |
+    |   content           |
+    | - Forwards dynamic  |
+    |   content to App    |
+    +---------------------+
+              |
+    +---------------------+
+    | Application Server  |
+    | - Executes App code |
+    | - Processes dynamic |
+    |   content           |
+    | - Communicates with |
+    |   the Database      |
+    +---------------------+
+              |
+    +---------------------+
+    | Application Files   |
+    | (Your Code Base)    |
+    | - Contains App code |
+    | - Deployed on both  |
+    |   App Servers       |
+    +---------------------+
+

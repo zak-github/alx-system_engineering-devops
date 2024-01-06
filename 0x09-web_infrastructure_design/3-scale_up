@@ -1,0 +1,47 @@
+# Scale Up - Advanced Infrastructure Design
+
+## Components:
+1. **Load-Balancer Cluster (2 HAproxy Servers):**
+   - Configured as a cluster for high availability and load distribution.
+   - Provides redundancy in case of load balancer failure.
+
+2. **Web Server:**
+   - Handles incoming HTTP requests.
+   - Serves static content and forwards dynamic content requests to the application server.
+
+3. **Application Server:**
+   - Executes the application code.
+   - Processes dynamic content and communicates with the database.
+
+4. **Database Server:**
+   - Stores and manages the website's data.
+
+## Role Explanations:
+
+- **Load-Balancer Cluster (2 HAproxy Servers):**
+  - Provides high availability and evenly distributes incoming traffic among multiple servers.
+  - The cluster ensures fault tolerance; if one load balancer fails, the other one can continue handling requests.
+
+- **Web Server:**
+  - Handles HTTP requests, serves static content, and forwards dynamic content requests to the application server.
+  - Separating the web server from the application server allows for scalability and easier maintenance.
+
+- **Application Server:**
+  - Executes the application code, processes dynamic content, and communicates with the database.
+  - Separating the application server from the web server provides a modular and scalable architecture.
+
+- **Database Server:**
+  - Stores and manages structured data used by the website.
+
+## Specifics:
+
+- **Load-Balancer Cluster:**
+  - Configured as a cluster for load balancing and high availability.
+  - Uses a distributed algorithm to evenly distribute requests among the load balancers.
+
+## Issues with this Infrastructure:
+
+- **Complexity:**
+  - The addition of a load balancer cluster increases the complexity of the infrastructure.
+  - Proper configuration and maintenance are required to ensure effective load balancing and high availability.
+
